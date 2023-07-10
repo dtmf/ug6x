@@ -1,0 +1,44 @@
+/dts-v1/;
+
+/ {
+        description = "Milesight uImage";
+        #address-cells = <1>;
+
+        images {
+		gpt-yeastar {
+                        description = "gpt-yeastar";
+                        data = /incbin/("milesight-gpt.dat");
+			type = "filesystem";
+                        compression = "none";
+                };
+                hlos-yeastar {
+                        description = "hlos-yeastar";
+                        data = /incbin/("uImage.itb");
+			type = "kernel";
+                        compression = "none";
+                        hash {
+                                algo = "sha1";
+                        };
+                };
+                rootfs-yeastar {
+                        description = "rootfs-yeastar";
+                        data = /incbin/("rootfs.img");
+			type = "filesystem";
+                        compression = "none";
+                };
+        };
+
+        configurations {
+                default = "standard";
+                standard {
+                        description = "Standard Boot";
+			gpt-yeastar = "gpt-yeastar";
+                        hlos-yeastar = "hlos-yeastar";
+                        rootfs-yeastar = "rootfs-yeastar";
+                        hash {
+                                algo = "sha1";
+                        };
+                };
+        };
+
+}; 

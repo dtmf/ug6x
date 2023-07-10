@@ -1,0 +1,48 @@
+--- a/feeds/packages/net/basicstation/files/etc/init.d/basicstation	2023-07-09 08:54:47.464380042 -0500
++++ b/feeds/packages/net/basicstation/files/etc/init.d/basicstation	2023-07-09 09:11:43.710566825 -0500
+@@ -11,8 +11,8 @@
+ USE_PROCD=1
+ 
+ #radioconf
+-DEFAULT_COMIF='usb'
+-DEFAULT_DEVPATH='/dev/ttyACM0'
++DEFAULT_COMIF='spi'
++DEFAULT_DEVPATH='/dev/spidev0.0'
+ DEFAULT_PPS=0
+ DEFAULT_PUBLIC=1
+ DEFAULT_CLKSRC=0
+@@ -132,11 +132,8 @@
+ 
+ 	json_add_object 'radio_conf'
+ 
+-	config_get comif "$section" comif "$DEFAULT_COMIF"
+-	config_get devpath "$section" devpath "$DEFAULT_DEVPATH"
+-	json_add_string 'device' ""$comif":"$devpath""
+-	config_get_bool buffer "$section" pps "$DEFAULT_PPS"
+-	json_add_boolean 'pps' "$buffer"
++	json_add_string 'device' "spi:/dev/spidev0.0"
++	json_add_boolean 'pps' "1"
+ 	config_get_bool buffer "$section" public "$DEFAULT_PUBLIC"
+ 	json_add_boolean 'lorawan_public' "$buffer"
+ 	config_get buffer "$section" clksrc "$DEFAULT_CLKSRC"
+@@ -164,8 +161,9 @@
+ 
+ 	config_get buffer "$section" routerid "$DEFAULT_ROUTER_ID"
+ 	json_add_string 'routerid' "$buffer"
+-	config_get buffer "$section" radioInit "$DEFAULT_RADIO_INIT"
+-	json_add_string 'radio_init' "$buffer"
++	json_add_string 'radio_init' "/usr/sbin/rinit.sh"
++	json_add_string 'RADIO_INIT_WAIT' "5s"
++	json_add_string 'TX_AIM_GAP' "50ms"
+ 	config_get buffer "$section" logFile "$DEFAULT_LOG_FILE"
+ 	json_add_string 'log_file' "$buffer"
+ 	config_get buffer "$section" logLevel "$DEFAULT_LOG_LEVEL"
+@@ -174,6 +172,7 @@
+ 	json_add_int 'log_size' $(( 1000000*buffer ))
+ 	config_get buffer "$section" logRotate "$DEFAULT_LOG_ROTATE"
+ 	json_add_int 'log_rotate' "$buffer"
++	json_add_string 'gps' "/dev/ttymxc0"
+ 
+ 	json_close_object
+ }
+

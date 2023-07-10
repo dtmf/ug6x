@@ -1,0 +1,45 @@
+# This sensor doesn't exist on the Milesight UG67
+# use "phantom" sensor instead,
+# always returns temperature = 25
+
+ libloragw/src/loragw_stts751.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/libloragw/src/loragw_stts751.c b/libloragw/src/loragw_stts751.c
+index 7766961..1c46805 100644
+--- a/libloragw/src/loragw_stts751.c
++++ b/libloragw/src/loragw_stts751.c
+@@ -78,6 +78,7 @@ License: Revised BSD License, see LICENSE.TXT file include in the project
+ /* --- PUBLIC FUNCTIONS DEFINITION ------------------------------------------ */
+ 
+ int stts751_configure(int i2c_fd, uint8_t i2c_addr) {
++#if 0
+     int err;
+     uint8_t val;
+ 
+@@ -141,13 +142,14 @@ int stts751_configure(int i2c_fd, uint8_t i2c_addr) {
+         DEBUG_PRINTF("ERROR: failed to write I2C device 0x%02X (err=%i)\n", i2c_addr, err);
+         return LGW_I2C_ERROR;
+     }
+-
++#endif
+     return LGW_I2C_SUCCESS;
+ }
+ 
+ /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ 
+ int stts751_get_temperature(int i2c_fd, uint8_t i2c_addr, float * temperature) {
++#if 0
+     int err;
+     uint8_t high_byte, low_byte;
+     int8_t h;
+@@ -176,6 +178,9 @@ int stts751_get_temperature(int i2c_fd, uint8_t i2c_addr, float * temperature) {
+     *temperature = ((h << 8) | low_byte) / 256.0;
+ 
+     DEBUG_PRINTF("Temperature: %f C (h:0x%02X l:0x%02X)\n", *temperature, high_byte, low_byte);
++#endif
++
++    *temperature = 25.0;
+ 
+     return LGW_I2C_SUCCESS;
+ }

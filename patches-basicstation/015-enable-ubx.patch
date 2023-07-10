@@ -1,0 +1,11 @@
+--- a/feeds/packages/net/basicstation/src/CMakeLists.txt	2023-07-09 08:54:47.464380042 -0500
++++ b/feeds/packages/net/basicstation/src/CMakeLists.txt	2023-07-09 09:00:47.046484953 -0500
+@@ -1,6 +1,7 @@
+ cmake_minimum_required(VERSION 3.18.4)
+ project(basicstation)
+ 
++add_compile_definitions(CFG_ubx)
+ add_compile_definitions(CFG_linux)
+ add_compile_definitions(CFG_lgw1)
+ add_compile_definitions(CFG_sx1302)
+

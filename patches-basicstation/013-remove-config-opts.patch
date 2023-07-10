@@ -1,0 +1,14 @@
+# test comment
+--- a/feeds/packages/net/basicstation/files/etc/config/basicstation	2023-07-09 08:54:47.464380042 -0500
++++ b/feeds/packages/net/basicstation/files/etc/config/basicstation	2023-07-09 09:06:05.079091555 -0500
+@@ -9,9 +9,6 @@
+ 	option trust ''
+ 
+ config sx130x 'sx130x'
+-	option comif ''
+-	option devpath ''
+-	option pps ''
+ 	option public ''
+ 	option clksrc ''
+ 	option radio0 ''
+

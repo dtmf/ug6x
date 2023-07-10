@@ -1,0 +1,10 @@
+--- a/Makefile	2023-05-22 16:01:00.342817732 -0500
++++ b/Makefile	2023-05-22 16:03:57.028632930 -0500
+@@ -4,6 +4,7 @@
+ #EXTRA_CFLAGS += -Wall
+ #EXTRA_CFLAGS += -Wextra
+ #EXTRA_CFLAGS += -Werror
++EXTRA_CFLAGS += -Wno-error
+ #EXTRA_CFLAGS += -pedantic
+ #EXTRA_CFLAGS += -Wshadow -Wpointer-arith -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
+ 
