@@ -1,11 +1,10 @@
 # Install OpenWrt on Milesight UG65/UG67
+(Updated Jul-7-2023)
 
 This repo contains info and tools for installing OpenWrt (master branch) with
 kernel 6.1 on a Milesight UG65/UG67 LoraWAN gateway.  (This has only been tested on a UG67.)
 
 ## What works
-
- - Semtech BasicStation (see notes.)
 
  - 4G, Ethernet, GPS, RTC, Temp/humidity sensor, Reset button, 4G LED, SYS LED
 
@@ -77,16 +76,6 @@ kernel 6.1 on a Milesight UG65/UG67 LoraWAN gateway.  (This has only been tested
 
 ## NOTES
 
-  - sx1302_hal library 
-     - This library tries to access a ST ts751 temperature sensor on the LoraWAN concentrator.
-     - The UG67 doesn't have this sensor, but does have a SHT3x. I don't know if it's located on the concentrator.
-     - For now a patch is used to create a "phantom sensor" which always returns 25(C).
-
-  - luci-app-lorawan
-     - The 'comif' option is set to USB (which is wrong) and cannot be changed in the GUI.
-     - A patch is used to remove this option from the GUI.
-
-  - Semtech BasicStation
-     - Config file patches
-
-  - CPU scaling? / DDR speed? / power save features?
+ - Semtech BasicStation
+   Not recommended since a lot of hardware would need to be initialized first:
+(GPIOs on LoraWAN concentrator, GPIOs on SOC, radio setup commands over SPI bus, ???)
